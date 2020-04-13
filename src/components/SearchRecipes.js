@@ -6,8 +6,10 @@ import {
   ControlLabel,
   Button,
 } from "react-bootstrap";
+import { connect } from "react-redux";
+import { setRecipes } from "../actions";
 
-function SearchRecipes() {
+function SearchRecipes({ setRecipes }) {
   const [ingredients, setIngredients] = useState("");
   const [dish, setDish] = useState("");
 
@@ -17,7 +19,9 @@ function SearchRecipes() {
 
     fetch(url)
       .then((response) => response.json())
-      .then((json) => console.log(" recipes ", json));
+      .then((json) => {
+        setRecipes(json.results);
+      });
   }
 
   return (
@@ -43,4 +47,4 @@ function SearchRecipes() {
   );
 }
 
-export default SearchRecipes;
+export default connect(null, { setRecipes })(SearchRecipes);

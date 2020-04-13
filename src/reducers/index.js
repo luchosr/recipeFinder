@@ -1,3 +1,4 @@
+import { combineReducers } from "redux";
 import { SET_RECIPES } from "../actions";
 
 function recipes(state = [], action) {
@@ -8,3 +9,7 @@ function recipes(state = [], action) {
       return state;
   }
 }
+
+const rootReducer = combineReducers({ recipes });
+
+export default rootReducer;
