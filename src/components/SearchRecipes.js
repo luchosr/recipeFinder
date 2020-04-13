@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   FormGroup,
@@ -8,17 +8,33 @@ import {
 } from "react-bootstrap";
 
 function SearchRecipes() {
+  const [ingredients, setIngredients] = useState("");
+  const [dish, setDish] = useState("");
+
+  function search() {
+    const url = `http://www.recipepuppy.com/api/?i=${ingredients}&q=${dish}`;
+    console.log("dish ", dish, "ingredients ", ingredients, "url ", url);
+  }
+
   return (
     <Form inline>
       <FormGroup>
         <ControlLabel>Ingredients</ControlLabel>{" "}
-        <FormControl type="text" placeholder="garlic, chicken" />
+        <FormControl
+          type="text"
+          placeholder="garlic, chicken"
+          onChange={(event) => setIngredients(event.target.value)}
+        />
       </FormGroup>{" "}
       <FormGroup>
         <ControlLabel>Dish</ControlLabel>{" "}
-        <FormControl type="text" placeholder="adobo" />
+        <FormControl
+          type="text"
+          placeholder="adobo"
+          onChange={(event) => setDish(event.target.value)}
+        />
       </FormGroup>
-      <Button>Submit</Button>
+      <Button onClick={() => search()}>Submit</Button>
     </Form>
   );
 }
