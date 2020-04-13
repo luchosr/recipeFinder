@@ -14,6 +14,10 @@ function SearchRecipes() {
   function search() {
     const url = `http://www.recipepuppy.com/api/?i=${ingredients}&q=${dish}`;
     console.log("dish ", dish, "ingredients ", ingredients, "url ", url);
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => console.log(" recipes ", json));
   }
 
   return (
